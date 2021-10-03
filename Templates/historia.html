@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>APLIKACJA KSIĘGOWA</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+
+        #hello
+        {
+        margin-top:30px;
+        border-size:5px;
+        border-radius:10px
+        border:solid;
+        padding:50px
+        width:700px;
+        height:100px;
+        margin-left:20px;
+        margin-right:20px;
+        background-color:#cfe2ff;
+        text-align:center;
+        }
+        #text
+        {
+        margin:auto;
+        padding:20px;
+        font-size:40px;
+        }
+
+        #magazyn{
+        margin-top:150px;
+        margin-left:20px;
+        margin-right:20px;
+        text-align:center;
+        #p{
+        float:left;
+        #p1{
+        float:right;
+    </style>
+</head>
+
+<body>
+<div id="hello">
+    <div id="text">Aplikacja Księgowa</div>
+</div>
+
+
+
+<div id="magazyn">
+    <h3>HISTORIA</h3>
+        {% if historia is defined and historia|length > 0 %}
+        <table class="table table-striped table-hover">
+        <thead>
+        </thead>
+        <tbody>
+        {% for transakcja in historia %}
+        <tr class="active">
+            <td>{{transakcja[0]}}</td>
+            <td>{{transakcja[1]}}</td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <span class="label error-primary">Historia Jest Pusta</span>
+    {%endif%}
+
+
+  <li >
+    <a class="nav-link active" aria-current="page" href="/">STRONA GŁÓWNA</a>
+  </li>
+</div>
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
+</body>
+</html>
