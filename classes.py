@@ -90,8 +90,6 @@ def sprzedaz(params):
         mg.magazyn[name] -= int(qty)
     else:
         mg.magazyn[name] = int(qty) - (2 * int(qty))
-    # if mg.magazyn[name]<0:
-    #     print("Wartość ujemna")
-    #     exit()
-# mg.create_commands(fr.actions)
-# mg.execute()
+    if mg.magazyn[name]<0:
+        print("Wartość ujemna")
+        exit()

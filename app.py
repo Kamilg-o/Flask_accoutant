@@ -60,6 +60,9 @@ def resp():
     for i in resp_dict.values():
         command_resp.append(i)
     mg.commands.append((command_resp[0], command_resp[1:]))
+    saldo_inpout = Action(action="saldo", kwota=wplata, comment=komentarz,saldo=mg.saldo)
+    db.session.add(saldo_inpout)
+    db.session.commit()
     return render_template("index.html", saldo=saldo, products=product_list)
 
 
@@ -80,6 +83,9 @@ def resp1():
     for i in resp_dict.values():
         command_resp.append(i)
     mg.commands.append((command_resp[0], command_resp[1:]))
+    kupno_input = Action(action="kupno",product=nazwa,price=cena,qty=ilosc,saldo=mg.saldo)
+    db.session.add(kupno_input)
+    db.session.commit()
     return render_template("index.html", saldo=saldo,products=product_list)
 
 @app.route("/resp2/", methods=["post","get"])
@@ -99,6 +105,10 @@ def resp2():
     for i in resp_dict.values():
         command_resp.append(i)
     mg.commands.append((command_resp[0],command_resp[1:]))
+    kupno_input = Action(action="sprzedaz", product=nazwa, price=cena, qty=ilosc, saldo=mg.saldo)
+    db.session.add(kupno_input)
+    db.session.commit()
+
     return render_template("index.html", saldo=saldo, products=product_list)
 
 @app.route("/resp3/",methods=["get","post"])
