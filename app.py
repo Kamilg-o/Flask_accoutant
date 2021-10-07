@@ -1,15 +1,12 @@
 from classes import mg
 from flask import Flask,render_template,request, url_for
 from flask_sqlalchemy import SQLAlchemy
+from flask_alembic import Alembic
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///test.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///baza.db'
 db = SQLAlchemy(app)
 
-
-class Products(db.Model):
-    name = db.Column(db.String(50),primary_key=True,)
-    amount = db.Column(db.Integer,nullable=False, unique=False)
 
 class Action(db.Model):
     pk = db.Column(db.Integer, primary_key=True)
@@ -126,4 +123,5 @@ def resp3():
         historia_list=historia_list[od:do]
     return render_template("historia.html" ,historia=historia_list,od=od,do=do)
 
-
+alembic = Alembic()
+alembic.init_app(app)

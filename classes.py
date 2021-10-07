@@ -62,10 +62,7 @@ mg = Manager()
 def saldo(params):
     value = int(params[0])
     comment = str(params[1])
-    if mg.saldo + value < 0:
-        print("bledna kwota")
-    else:
-        mg.saldo += value
+    mg.saldo += value
 
 
 @mg.asign("kupno", 3)
@@ -73,11 +70,15 @@ def kupno(params):
     name = params[0]
     price = params[1]
     qty = int(params[2])
-    mg.saldo -= int(price) * int(qty)
-    if name in mg.magazyn.keys():
-        mg.magazyn[name] += int(qty)
+    test=mg.saldo-(int(price) * int(qty))
+    if test >=0:
+        mg.saldo -= (int(price) * int(qty))
+        if name in mg.magazyn.keys():
+            mg.magazyn[name] += int(qty)
+        else:
+            mg.magazyn[name] = int(qty)
     else:
-        mg.magazyn[name] = int(qty)
+        mg.saldo=mg.saldo
 
 
 @mg.asign("sprzedaz", 3)
@@ -85,11 +86,13 @@ def sprzedaz(params):
     name = params[0]
     price = params[1]
     qty = params[2]
-    mg.saldo += int(price) * int(qty)
-    if name in mg.magazyn.keys():
-        mg.magazyn[name] -= int(qty)
-    else:
-        mg.magazyn[name] = int(qty) - (2 * int(qty))
-    if mg.magazyn[name]<0:
-        print("Wartość ujemna")
-        exit()
+    test_magazynu = mg.magazyn[name] - int(qty)
+    while test_magazynu >= 0:
+        mg.saldo += int(price) * int(qty)
+        if name in mg.magazyn.keys():
+            mg.magazyn[name] -= int(qty)
+        else:
+            mg.magazyn[name] = int(qty) - (2 * int(qty))
+        break
+
+
