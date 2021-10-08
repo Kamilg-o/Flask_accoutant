@@ -86,13 +86,14 @@ def sprzedaz(params):
     name = params[0]
     price = params[1]
     qty = params[2]
-    test_magazynu = mg.magazyn[name] - int(qty)
-    while test_magazynu >= 0:
-        mg.saldo += int(price) * int(qty)
-        if name in mg.magazyn.keys():
-            mg.magazyn[name] -= int(qty)
-        else:
-            mg.magazyn[name] = int(qty) - (2 * int(qty))
-        break
+    if name in mg.magazyn.keys():
+        test_magazynu = mg.magazyn[name] - int(qty)
+        while test_magazynu >= 0:
+            mg.saldo += int(price) * int(qty)
+            if name in mg.magazyn.keys():
+                mg.magazyn[name] -= int(qty)
+            else:
+                mg.magazyn[name] = int(qty) - (2 * int(qty))
+            break
 
 
