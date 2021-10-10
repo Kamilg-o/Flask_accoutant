@@ -36,6 +36,7 @@ mg.execute()
 def index():
     saldo = mg.saldo
     products = mg.magazyn
+
     product_list =[]
     for product in products:
         product_list.append((product,products[product]))
